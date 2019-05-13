@@ -1,0 +1,23 @@
+Package: nmbutemplates
+Type: Package
+Title: Article Formats for R Markdown
+Version: 0.7
+Authors@R: c(
+  person("Raju", "Rimal", role = c("aut", "cre"), email = "raju.rimal@nmbu.no")
+  )
+Description: A suite of custom R Markdown formats and templates for
+  various nmbu documents including exam questions, presentation for lecture, conference etc.
+License: GPL-3
+Imports: utils, rmarkdown, knitr, yaml, tinytex, xfun
+SystemRequirements: GNU make
+URL: https://github.com/mathatistics/nmbutemplates
+BugReports: https://github.com/mathatistics/nmbutemplates/issues
+RoxygenNote: 6.1.1
+Suggests: testit
+Encoding: UTF-8
+NeedsCompilation: no
+Packaged: 2019-03-16 13:57:32 UTC
+Author: Raju Rimal [aut, cre] (<https://orcid.org/0000-0001-6097-0285>)
+Maintainer: Raju Rimal <raju.rimal@nmbu.no>
+Repository: GitHub
+Date/Publication: 2019-03-16 14:20:02 UTC
