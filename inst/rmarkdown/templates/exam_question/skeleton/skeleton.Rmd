@@ -19,8 +19,7 @@ logo: 'Logo.png'
 graphics: true
 output:
   nmbutemplates::exam_question:
-    md_extensions: +raw_attribute
-    keep_tex: yes
+    show_answer: true
 extra_details: |
   You may answer in Norwegian (or “Scandinavian”) or English.
 ---
@@ -54,18 +53,12 @@ str(mtcars)
 
 a) How many cars have four cylinders?
 
-    ```{=latex}
-    \ifans
-    \begin{answer}
-    ```
+    ::: answer
         
     ```{r}
     table(mtcars$cyl)
     ```
 
-    ```{=latex}
-    \end{answer}
-    \fi
-    ```
+    :::
 
 

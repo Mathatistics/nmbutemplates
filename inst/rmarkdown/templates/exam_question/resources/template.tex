@@ -179,6 +179,12 @@ $endif$
 \makeatother
 
 
+% Highlighting chunk input if visible
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+
 % Other customization
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
@@ -292,20 +298,23 @@ $endif$
 % Some Customization
 \setcounter{secnumdepth}{0}
 
-% show-answer variable will control to show or hide answers
-\newif\ifans
-$if(show-answer)$
-\anstrue
-$else$
-\ansfalse
-$endif$
+% % show-answer variable will control to show or hide answers
+% \newif\ifans
+% $if(show-answer)$
+% \anstrue
+% $else$
+% \ansfalse
+% $endif$
 
 % Create an environment'' `answer' and set it color with variable ans-color else
 % it will be blue
-\newenvironment{answer}{\color{$if(ans-color)$$ans-color$$else$blue$endif$}\textsc{Answer:}}{}
+\newenvironment{answer}
+  {\color{$if(ans-color)$$ans-color$$else$blue$endif$}\textsc{Answer:}}
+  {}
 
 % Header and Footer of the document
 \pagestyle{fancy}
+\setlength{\headheight}{15pt}
 \fancyhf{}
 $if(date)$\rhead{$date$}$endif$
 $if(title)$\lhead{$title$}$endif$
@@ -326,7 +335,7 @@ $if(title)$
 $if(beamer)$
 \frame{\titlepage}
 $else$
-$if(logo)${\centering\includegraphics[width=7cm]{$logo$}\vspace{24pt}\\}$endif$
+$if(logo)${\centering\includegraphics[width=7cm]{$logo$}\\\vspace{24pt}}$endif$
 \doublespacing
 \textbf{\Huge Examination Questions}
 \vspace{10pt}\\

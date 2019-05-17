@@ -8,53 +8,24 @@ find_resource <- function(template, file = 'template.tex') {
   res
 }
 
-knitr_fun <- function(name) utils::getFromNamespace(name, 'knitr')
-
-output_asis <- knitr_fun('output_asis')
-
-merge_list <- function(x, y) {
-  fun <- knitr_fun('merge_list')
-  fun(as.list(x), y)
+parse_custom_block <- function(text_input, show = TRUE) {
+  x <- text_input
+  env_idx <- grep(":::", x)
+  if (length(env_idx) %% 2) stop("Non closing custom block exists")
+  env_pair <- lapply(seq(1, length(env_idx), 2), function(y){
+    c(env_idx[y], env_idx[y+1])
+  })
+  if (show) {
+    env_names <- trimws(gsub("::: (.+)", "\\1", x[sapply(env_pair, "[[", 1)]))
+    for (idx in 1:length(env_pair)) {
+      ix <- env_pair[[idx]]
+      ename <- env_names[idx]
+      x[ix[1]] <- gsub("::: (.+)", paste0("\\\\begin{", ename, "}"), x[ix[1]])
+      x[ix[2]] <- gsub(":::", paste0("\\\\end{", ename, "}"), x[ix[2]])
+    }
+  } else {
+    idx <- unlist(lapply(env_pair, function(x) seq(x[1], x[2])))
+    x <- x[-idx]
+  }
+  return(x)
 }
-
-#' Render a pandoc template.
-#'
-#' This is a hacky way to access the pandoc templating engine.
-#'
-#' @param metadata A named list containing metadata to pass to template.
-#' @param template Path to a pandoc template.
-#' @param output Path to save output.
-#' @return (Invisibly) The path of the generate file.
-#' @examples
-#' x <- nmbutemplates:::template_pandoc(
-#'   list(preamble = "%abc", filename = "wickham"),
-#'   nmbutemplates:::find_resource("rjournal_article", "RJwrapper.tex"),
-#'   tempfile()
-#' )
-#' if (interactive()) file.show(x)
-#' @noRd
-template_pandoc <- function(metadata, template, output, verbose = FALSE) {
-  tmp <- tempfile(fileext = ".md"); on.exit(unlink(tmp), add = TRUE)
-  xfun::write_utf8(c("---", yaml::as.yaml(metadata), "---\n"), tmp)
-  
-  rmarkdown::pandoc_convert(
-    tmp, "markdown", output = output, verbose = verbose,
-    options = paste0("--template=", template),
-  )
-  invisible(output)
-}
-
-
-# Helper function to create a custom format derived from pdf_document that
-# includes a custom LaTeX template
-pdf_document_format <- function(
-  format, template = find_resource(format, 'template.tex'), ...
-) {
-  fmt <- rmarkdown::pdf_document(..., template = template)
-  fmt$inherits <- "pdf_document"
-  fmt
-}
-
-
-
-
