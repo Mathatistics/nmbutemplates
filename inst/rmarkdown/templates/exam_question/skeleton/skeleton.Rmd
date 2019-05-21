@@ -9,11 +9,11 @@ exam_type: "C2: all types of calculators, all other written material"
 author: "Teacher (Mobile Number: 123-456)"
 external: "External"
 date: "May 16, 2019"
-fontsize: 12
+fontsize: '12pt'
 geometry: 'margin=1 in'
 fontfamily: 'mathpazo'
 papersize: 'A4'
-show_answer: false
+show_answer: true
 linestretch: 1.25
 logo: 'Logo.png'
 graphics: true

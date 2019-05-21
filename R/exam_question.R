@@ -15,6 +15,7 @@ NULL
 
 #' @title Exam Question Template
 #' @section \code{exam_question}: Format for creating Exam Questions adapted from older exam formats.
+#' @importFrom rmarkdown pdf_document
 #' @param
 #'   ... Arguments passed to \code{rmarkdown::\link{pdf_document}()}.
 #' @return An R Markdown output format.
@@ -24,5 +25,6 @@ NULL
 #' @rdname exam_question
 #' @export
 exam_question <- function(...) {
-  pdf_document_format("exam_question", ...)
+  template <- find_resource("exam_question")
+  rmarkdown::pdf_document(template =  template, ...)
 }

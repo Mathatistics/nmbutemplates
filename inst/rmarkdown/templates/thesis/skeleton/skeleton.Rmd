@@ -1,0 +1,82 @@
+---
+site: bookdown::bookdown_site
+title: 'Thesis Title'
+alt-title: 'Avhandlingstittel'
+date: "`r format(Sys.Date(), format = '%m, %Y')`"
+year: "`r format(Sys.Date(), format = '%Y')`"
+month: "`r format(Sys.Date(), format = '%b')`"
+location: 'Ås'
+docsite: 'https://github.com/username/repo-name'
+author:
+  name: "Author Name"
+  email: 'author.email@nmbu.no'
+  homepage: 'https://www.example.com/'
+  affiliation: |
+    Group\
+    Faculty\
+    Norwegian University of Life Sciences
+supervisors:
+  - title: 'Professor'
+    name: 'First Supervisor'
+    affiliation: |
+      Faculty\
+      Norwegian University of Life Sciences\
+      Ås, Norway
+  - title: 'Professor'
+    name: 'Second Supervisor'
+    affiliation: |
+      Faculty\
+      Norwegian University of Life Sciences\
+      Ås, Norway
+bibliography: 'References.bib'
+biblio-style: 'plainnat'
+biblio-title: 'References'
+natbiboptions: 'authoryear'
+nociteall: true
+toc: true
+lof: true
+lot: true
+knit: 'bookdown::render_book'
+logo: "Logo.pdf"
+logo-width: '0.6\linewidth'
+thesis-number: "1234:56"
+issn: "1234-5678"
+isbn: "123-45-678-1234-5"
+quote: "Awesome quote that I am always inspired with."
+quote-author: "- Author of Quot"
+keywords: ['keyword1 ', 'keyword2 ', 'keyword3 ']
+acknowledgments: chapters/00-Acknowledgment.md
+summary: chapters/00-Summary.md
+sammendrag: chapters/00-Sammendrag.md
+preface: chapters/00-Preface.md
+papers:
+  - title: "Paper1 is all about paper 1"
+    path: "papers/001.pdf"
+  - title: "Added few things on paper 2"
+    path: "papers/002.pdf"
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  comment    = NA,
+  out.width  = '100%',
+  dev        = c('pdf', 'svg'),
+  fig.retina = 2,
+  fig.pos    = "!htb",
+  echo       = FALSE
+)
+```
+
+# Introduction #
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra diam vel orci viverra facilisis. Sed aliquet lobortis bibendum. Proin eu nibh tincidunt, mollis dui ac, elementum metus. In eget est tortor. Sed cursus in tellus quis sollicitudin. Maecenas convallis lectus lorem. Sed tortor nulla, aliquam tincidunt orci nec, tempor dignissim sapien. Integer consequat tortor quis metus blandit suscipit. Nulla maximus vel lacus sit amet mattis. Cras tristique, dui at blandit mattis, purus lorem auctor justo, vitae malesuada sapien diam eu libero. Suspendisse id orci sit amet justo egestas placerat.
+
+Mauris elit justo, tincidunt ac rutrum sed, eleifend at sapien. Fusce efficitur nisi in nunc venenatis blandit. Etiam dapibus scelerisque mauris, sit amet sagittis diam commodo vitae. Sed lobortis pellentesque urna nec dictum. Aenean condimentum leo non ligula mollis, consequat lobortis elit fermentum. Cras sed lacus risus. Praesent sollicitudin risus tincidunt, porta tellus eget, facilisis augue. Proin eleifend sem eget diam dignissim egestas. Sed magna ipsum, fermentum sed sem id, euismod efficitur nulla.
+
+Aenean sollicitudin egestas urna sagittis vehicula. Nullam nec lacinia eros. Duis facilisis ultricies mattis. Vivamus lobortis sollicitudin justo, at eleifend ante auctor in. Vestibulum non tortor ac augue congue fringilla et finibus nulla. Vestibulum sed convallis nisi. Suspendisse ut porttitor metus. Mauris vehicula urna magna, eget sagittis leo accumsan ac. Suspendisse id varius mi. Aliquam tincidunt magna eu metus gravida, eget egestas ex ornare. Pellentesque convallis bibendum erat, vitae fringilla felis rhoncus sed. Ut elementum at tellus in egestas. Curabitur enim turpis, iaculis at lorem et, volutpat dignissim lacus.
+
+## Background ##
+
+Cras sed arcu nisi. Nullam tempor, lorem sit amet aliquam condimentum, sem leo malesuada dui, ac interdum enim nisi et metus. Integer gravida nibh et velit efficitur consequat. Pellentesque dolor ex, pharetra vitae facilisis in, congue sed velit. Morbi id placerat risus. Integer pulvinar aliquet consequat. Mauris laoreet, ex sed mollis eleifend, nulla massa condimentum dolor, non iaculis ex nibh vel ligula. Nunc sit amet lorem non enim mollis rutrum ut ac nisi. Cras ut tempor lorem. Morbi pulvinar efficitur lorem non vestibulum.
+
