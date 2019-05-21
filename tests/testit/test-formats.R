@@ -13,8 +13,8 @@ test_format <- function(name, os_skip = NULL) {
 
   # create a draft of the format
   testdoc <- paste0(name, ".Rmd")
-  rmarkdown::draft(testdoc, system.file("rmarkdown", "templates", name, package = "nmbutemplates"),
-                   create_dir = FALSE, edit = FALSE)
+  if (name %in% c("thesis")) testdoc <- "index.Rmd"
+  nmbutemplates::create(testdoc, name, create_dir = FALSE)
 
   message('Rendering the ', name, ' format...')
   output_file <- rmarkdown::render(testdoc, quiet = TRUE)
@@ -24,3 +24,4 @@ test_format <- function(name, os_skip = NULL) {
 }
 
 test_format("exam_question")
+test_format("thesis")

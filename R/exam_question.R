@@ -1,6 +1,6 @@
-#--- NOTE to contributors ------------------------------------------------------
-# Please order these format functions alphabetically.
-#-------------------------------------------------------------------------------
+## --- NOTE to contributors ------------------------------------------------------
+## Please order these format functions alphabetically.
+## -------------------------------------------------------------------------------
 
 #' R Markdown output formats NMBU
 #'
@@ -27,13 +27,13 @@ NULL
 #' @export
 
 exam_question <- function(..., show_answer = FALSE) {
-  
+
   template <- find_resource("exam_question")
-  base <- rmarkdown::pdf_document(template = template, ...)
-  
+  base <- rmarkdown::pdf_document(template = template, highlight = NULL, keep_tex = TRUE, ...)
+
   base$pandoc$to <- "latex"
   base$pandoc$ext <- ".tex"
-  
+
   ## Take the answers and wrap around with answer environment
   ## This function can also handle other environemnt
   ## Would be nice to incorporate HTML output as well
@@ -44,8 +44,8 @@ exam_question <- function(..., show_answer = FALSE) {
     x <- parse_custom_block(x, show_answer)
     xfun::write_utf8(x, con)
   }
-  
-  ## The manually preprocessed text need to be proparly parsed before 
+
+  ## The manually preprocessed text need to be proparly parsed before
   ## submitting to LaTeX.
   post <- base$post_processor
   base$post_processor <- function(metadata, input, output, clean, verbose) {
@@ -65,10 +65,10 @@ exam_question <- function(..., show_answer = FALSE) {
     }
     xfun::write_utf8(x, f)
     tinytex::latexmk(
-      f, base$pandoc$latex_engine,
-      if ('--biblatex' %in% base$pandoc$args) 'biber' else 'bibtex'
-    )
+               f, base$pandoc$latex_engine,
+               if ('--biblatex' %in% base$pandoc$args) 'biber' else 'bibtex'
+             )
   }
-  
+
   return(base)
 }

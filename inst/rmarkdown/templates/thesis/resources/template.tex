@@ -1,0 +1,335 @@
+% *******************************************************
+% SUPPRESS WARNINGS
+% *******************************************************
+\RequirePackage{silence}
+\WarningFilter{scrbook}{Usage of package `titlesec'}
+\WarningFilter{titlesec}{Non standard sectioning command detected}
+
+% *******************************************************
+% DOCUMENT FRONT MATTER START
+% *******************************************************
+\documentclass[11pt,twoside,openright,titlepage,
+  headinclude,footinclude,BCOR=5mm,
+  numbers=noenddot,cleardoublepage=empty,
+  tablecaptionabove, dottedtoc,
+  bibliography=totoc]{scrreprt}
+\usepackage{subfig}
+\usepackage[eulerchapternumbers, subfig, beramono, eulermath, pdfspacing]{classicthesis} 
+\usepackage{arsclassica}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{pdfpages}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage[norsk,american]{babel}
+\usepackage[paperwidth=17cm, paperheight=24cm, margin=2.5cm]{geometry}
+\usepackage[cam,a4,center,pdflatex]{crop}
+\usepackage{setspace}
+
+% *******************************************************
+% ADDITIONAL PACKAGES
+% *******************************************************
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+% *******************************************************
+% REFERENCE PACKAGES
+% *******************************************************
+$if(natbib)$
+  \usepackage[$natbiboptions$]{natbib}
+  \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+$if(biblatex)$
+\usepackage[
+  $if(biblio-style)$
+    style=$biblio-style$,$endif$
+  $for(biblatexoptions)$
+    $biblatexoptions$$sep$,
+  $endfor$
+]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+
+% *******************************************************
+% DEFINE VARIABLES
+% *******************************************************
+\newcommand{\Name}{$author.name$}
+\newcommand{\Title}{$title$}
+\newcommand{\Location}{\spacedlowsmallcaps{$location$}}
+\newcommand{\Year}{$year$}
+\newcommand{\Month}{$month$}
+\newcommand{\Date}{\Year, \Month}
+\newcommand{\docsite}{\url{$docsite$}}
+\newcommand{\Subtitle}{$subtitle$}
+\newcommand{\email}{\mail{$author.email$}}
+\newcommand{\homepage}{\url{$author.homepage$}}
+\newcommand{\Affiliation}{$author.affiliation$}
+\newcommand{\Faculty}{$author.faculty$}
+\newcommand{\Group}{$author.group$}
+\newcommand{\alttitle}{$alt-title$}
+
+% *******************************************************
+% CUSTOMIZATIONS
+% *******************************************************
+\newcommand{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\titlecontents{part}[0pt]{\pagebreak}{}{\Large\MakeTextUppercase}{}
+\titleformat{\part}[display]
+  {\normalfont\centering\Large}%
+  {\thispagestyle{empty}\partname~\MakeTextUppercase{\thepart}}{1em}%
+  {\color{Maroon}\spacedallcaps}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\DeclareTOCStyleEntry[beforeskip=3pt]{tocline}{section}
+
+% *******************************************************
+% DOCUMENT BEGIN
+% *******************************************************
+\begin{document}
+\pagenumbering{Roman}
+\pagestyle{plain}
+
+% *******************************************************
+% Title Front
+% *******************************************************
+\begin{titlepage}
+  \pdfbookmark{Titlepage}{Titlepage}
+  \begin{center}
+    \large \sffamily
+    \bigskip
+    {\huge\spacedlowsmallcaps{\Title} \\}
+    \bigskip
+    {\large{\alttitle}} \\
+    \vfill
+    {\Large\spacedlowsmallcaps{Doctor of Philosophy (PHD) Thesis}} \\
+    \bigskip
+    {\Large{\spacedlowsmallcaps\Name}} \\
+    \vfill
+    {\normalsize \Affiliation}
+    \vfill
+    {\normalsize \Location, \Year \\}
+    \vfill
+    $if(logo)$
+    $if(logo-width)$
+      \newcommand{\logowidth}{$logo-width$}
+    $else$
+      \newcommand{\logowidth}{5cm}
+    $endif$
+      \includegraphics[width=\logowidth]{$logo$} \\
+    $endif$
+    \vfill
+    {\normalsize
+      $if(thesis-number)$Thesis Number: $thesis-number$\\$endif$
+      $if(issn)$ISSN:  $issn$\\$endif$
+      $if(isbn)$ISBN:  $isbn$\\$endif$
+    }
+  \end{center}
+\end{titlepage}
+
+% *******************************************************
+% Title Back
+% *******************************************************
+\thispagestyle{empty}
+\hfill \vfill
+$if(quote)$
+\noindent
+\textit{$quote$}\\
+$if(quote-author)$
+\spacedlowsmallcaps{$quote-author$}
+$endif$
+\vfill
+$endif$
+$if(supervisors)$
+\noindent
+{\textbf{Supervisors:}} \\
+$for(supervisors)$
+$supervisors.title$ \textit{$supervisors.name$}\\
+$supervisors.affiliation$\\
+\medskip\\
+$endfor$
+\bigskip \\
+$endif$
+\noindent
+\textit{\Title} \\
+{\spacedlowsmallcaps{PhD Thesis, \Date\,\, \textcopyright\, \Name}} \\
+\bigskip \\
+\noindent{\spacedlowsmallcaps{Website}}: \\
+\docsite \\
+\medskip
+\noindent{\spacedlowsmallcaps{E-mail}}: \\
+\email
+\vspace{1cm}
+\hrule
+\bigskip
+\noindent This thesis is prepared with \texttt{ArsClassica} {\LaTeX} template with \texttt{pandoc} and r-package \texttt{bookdown}.
+% $if(docsite)$\begin{flushright}source: \url{$docsite$}\end{flushright}$endif$
+\pagestyle{scrheadings} 
+
+% *******************************************************
+% ABSTRACT
+% *******************************************************
+$if(abstract)$
+\cleardoublepage
+\pdfbookmark{Abstract}{Abstract}
+\addchap{Abstract}
+\input{$abstract$}
+$endif$
+
+% *******************************************************
+% SUMMARY
+% *******************************************************
+\begingroup
+$if(summary)$
+\pdfbookmark{Summary}{Summary}
+\addchap{Summary}
+\input{$summary$}
+$endif$
+
+$if(sammendrag)$
+\KOMAoptions{open=left}
+\begin{otherlanguage}{norsk}
+\pdfbookmark{Sammendrag}{Sammendrag}
+\addchap{Sammendrag}
+\input{$sammendrag$}
+\end{otherlanguage}{norsk}
+\KOMAoptions{open=right}
+$endif$
+\endgroup
+
+% *******************************************************
+% ACKNOWLEDGMENT
+% *******************************************************
+$if(acknowledgments)$
+\pdfbookmark{Acknowledgments}{Acknowledgments}
+\begingroup
+\cleardoublepage
+\addchap{Acknowledgment}
+\input{$acknowledgments$}
+\endgroup
+$endif$
+
+% *******************************************************
+% PREFACE
+% *******************************************************
+$if(preface)$
+\pdfbookmark{Preface}{Preface}
+\begingroup
+\cleardoublepage
+\addchap{Preface}
+\input{$preface$}
+\endgroup
+$endif$
+
+% *******************************************************
+% INCLUDE ANYTHING BEFORE
+% *******************************************************
+$for(include-before)$
+$include-before$
+$endfor$
+
+% *******************************************************
+% Contents
+% *******************************************************
+$if(toc)$
+\cleardoublepage
+\phantomsection
+\pdfbookmark{\contentsname}{tableofcontents}
+\setcounter{tocdepth}{$if(tocdepth)$$tocdepth$$else$2$endif$}
+\begingroup 
+  \let\clearpage\relax
+  \let\cleardoublepage\relax
+  $if(toc-title)$
+  \renewcommand*\contentsname{$toc-title$}
+  $endif$
+  \tableofcontents
+\endgroup
+\markboth{\spacedlowsmallcaps{\contentsname}}
+{\spacedlowsmallcaps{\contentsname}} 
+
+\begingroup
+$if(lot)$
+\cleardoublepage
+\listoftables
+\vfill
+\let\clearpage\relax
+\let\cleardoublepage\relax
+$endif$
+
+$if(lof)$
+\listoffigures
+\vfill
+$endif$
+\endgroup
+
+\begingroup 
+  \let\clearpage\relax
+  \let\cleardoublepage\relax
+\endgroup
+$endif$  
+
+\cleardoublepage
+
+% *******************************************************
+% BODY START
+% *******************************************************
+
+\pagenumbering{arabic}
+
+$body$
+
+% *******************************************************
+% BIBLIOGRAPHY START
+% *******************************************************
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(has-chapters)$
+  \renewcommand\bibname{$biblio-title$}
+$else$
+  \renewcommand\refname{$biblio-title$}
+$endif$ % has-chapters
+$endif$ % biblio-title
+  \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+$endif$ % bibliography
+$endif$ % natbib
+
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+$endif$ % biblatex
+
+$if(nociteall)$
+\nocite{*}
+$endif$
+
+% *******************************************************
+% PAPER START
+% *******************************************************
+\appendix
+$if(papers)$
+\part*{List of Research Papers}
+$for(papers)$
+\par\chapter{$papers.title$}
+\cleardoublepage
+\includepdf[pages=-]{$papers.path$}
+$endfor$
+$endif$
+
+% *******************************************************
+% ANYTHING EXTRA
+% *******************************************************
+$for(include-after)$
+$include-after$
+$endfor$
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

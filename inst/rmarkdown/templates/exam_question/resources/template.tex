@@ -1,7 +1,3 @@
-% Options for packages loaded elsewhere
-$if(colorlinks)$
-\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
-$endif$
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \documentclass[
@@ -9,7 +5,11 @@ $if(fontsize)$$fontsize$,$endif$% Specify Font size as fontsize variable
 $if(lang)$$babel-lang$,$endif$% Different language can be used using babel package
 $if(papersize)$$papersize$paper,$endif$% Paper size A4/Letter/something else
 $for(classoption)$$classoption$$sep$,$endfor$]% Various class specific options
-{$documentclass$}% Document class, article class is used by default
+{article}% Document class, article class is used by default
+
+% Extra necessary packages are loaded here
+\usepackage{amssymb,amsmath}
+\usepackage[dvipsnames, svgnames]{xcolor}
 
 % Font Family to use throughout the document else lmodern will be used
 $if(fontfamily)$
@@ -22,10 +22,6 @@ $endif$
 $if(linestretch)$
 \usepackage{setspace}
 $endif$
-
-% Extra necessary packages are loaded here
-\usepackage{amssymb,amsmath}
-\usepackage{xcolor}
 
 % XeLaTeX or LuaTeX can be used to render LaTeX
 % This gives more control to different fonts
@@ -178,7 +174,6 @@ $endif$
 \def\fps@figure{htbp}
 \makeatother
 
-
 % Highlighting chunk input if visible
 $if(highlighting-macros)$
 $highlighting-macros$
@@ -314,7 +309,8 @@ $endif$
 
 % Header and Footer of the document
 \pagestyle{fancy}
-\setlength{\headheight}{15pt}
+\setlength{\headheight}{20pt}
+\setlength{\footskip}{20pt}
 \fancyhf{}
 $if(date)$\rhead{$date$}$endif$
 $if(title)$\lhead{$title$}$endif$
@@ -413,7 +409,7 @@ $body$
 
 
 % End of the document 
-\vfill\hrule
+\vspace{10pt}\vfill\hrule
 \begin{description}
 $if(author)$\item[Course Responsible:] $author$$endif$
 $if(external)$\item[External Examiner:] $external$$endif$

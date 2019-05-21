@@ -1,0 +1,30 @@
+nmbutemplates::thesis:
+  highlight: kate
+  pandoc_args: --top-level-division=chapter
+  toc: true
+  fig_caption: yes
+  citation_package: natbib
+  md_extensions: -autolink_bare_uris
+  dev: "cairo_pdf"
+  keep_tex: yes
+#bookdown::gitbook:
+#  dev: svg
+#  number_sections: no
+#  css: style.css
+#  citation_package: natbib
+#  config:
+#    toc:
+#      collapse: section
+#      before: '<li><a href="./index.html"><strong>PhD/Masters Thesis</strong></a></li>'
+#      after: |
+#        <li><a name="title" href="javascript:void(0)"><strong>Appendix/Papers:</strong></a><ul>
+#        <li><a href="#" target="_blank">Paper I</a></li>
+#        <li><a href="#" target="_blank">Paper II</a></li>
+#        <li class="toc-footer"><a href="https://bookdown.org" target="blank">Published with <em>BookDown</em></a></li>
+#    download: ['epub', 'pdf']
+#    sharing: 
+#      github: yes
+#      facebook: no
+#      twitter: yes
+#      google: yes
+  
