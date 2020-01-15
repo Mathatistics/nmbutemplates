@@ -2,10 +2,17 @@
 
 export(create)
 export(exam_question)
+<<<<<<< HEAD
+=======
+export(nmbu_eng)
+>>>>>>> develop
 export(thesis)
 importFrom(bookdown,pdf_book)
 importFrom(rmarkdown,draft)
 importFrom(rmarkdown,knitr_options)
 importFrom(rmarkdown,output_format)
 importFrom(rmarkdown,pandoc_options)
+<<<<<<< HEAD
 importFrom(rmarkdown,pdf_document)
+=======
+>>>>>>> develop

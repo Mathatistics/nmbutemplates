@@ -12,7 +12,7 @@ Imports: utils, rmarkdown, knitr, yaml, tinytex, xfun, bookdown
 SystemRequirements: GNU make
 URL: https://github.com/mathatistics/nmbutemplates
 BugReports: https://github.com/mathatistics/nmbutemplates/issues
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Suggests: testit
 Encoding: UTF-8
 NeedsCompilation: no

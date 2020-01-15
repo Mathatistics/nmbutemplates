@@ -1,0 +1,94 @@
+\RequirePackage{beamerthememetropolis}
+\RequirePackage{tikz}
+
+% \useinnertheme{NMBU}
+% \useoutertheme{NMBU}
+\usecolortheme{NMBU}
+\usefonttheme{NMBU}
+
+% Remove default slide number
+\setbeamertemplate{footline}[default]
+\setbeamerfont{frametitle}{size=\Large}
+
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth, \the\paperheight);
+    
+    % NMBU Green with only Logo for page 0 (No footer)
+    \ifnum\thepage>0 \relax%
+      \fill[color=nmbugreen] (0,0) rectangle (\the\paperwidth, \the\paperheight);
+    \fi
+    
+    % NMBU Green background for page 1 (Also contain footer)
+    \ifnum\thepage>1 \relax%
+      \draw[white] (0.05\paperwidth,1) -- (0.95\paperwidth,1);
+      \node[white, align=right, anchor=east] at (0.95\paperwidth,0.5) 
+        {\scriptsize Norwegian University of Life Sciences};
+    \fi
+    
+    % Different Color on page greater than 2
+    \ifnum\thepage>2\relax%
+      \fill[framebackground] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+      
+      % If you want something that looks like a footer
+      \draw[nmbugreen] (0.05\paperwidth,1) -- (0.95\paperwidth,1);
+      \node[nmbugreen, align=left, anchor=west]  at (0.05\paperwidth, 0.5)
+        {\scriptsize \insertframenumber};
+      \node[nmbugreen, align=right, anchor=east] at (0.95\paperwidth, 0.5) 
+        {\scriptsize Norwegian University of Life Sciences};
+    \fi
+  \end{tikzpicture}
+}
+
+
+% \metroset{progressbar=foot}
+
+% \setbeamertemplate{itemize subsubitem}{$\clubsuit$}
+% \setbeamertemplate{caption}[numbered]
+\setbeamertemplate{navigation symbols}{} % turn off pdf nav symbols
+
+% LAST THANK YOU PAGE
+\newcommand{\thankyoumessage}[1]{\node[white,align=center,font=\huge]
+  at (0.425\paperwidth, 0.6\paperheight) {\textbf{#1}};}
+
+\usepackage{etoolbox}
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.2em}{}{}
+
+% Figure placement
+% \RequirePackage[absolute,overlay]{textpos}
+% \setlength{\TPHorizModule}{1cm}
+% \setlength{\TPVertModule}{1cm}
+% \def\placefig#1#2#3#4{\begin{textblock}{.1}(#1,#2)\rlap{\includegraphics[#3]{#4}}\end{textblock}}
+
+% Redefine shaded environment if it exists (for R plots)
+\ifcsname Shaded\endcsname
+  \definecolor{shadecolor}{RGB}{225,225,225}
+  \renewenvironment{Shaded}{\color{black}\begin{snugshade}\color{black}}{\end{snugshade}}
+\fi
+
+\defbeamertemplate*{finalpage}{lastpage}[1]{
+% \setbeamertemplate{finalpage}{
+  % \begin{frame}
+    % \begin{tikzpicture}
+      \def\nsquares{#1}
+      \def\squaresize{0.52}
+      \def\halfsquare{0.5*\squaresize}
+      \useasboundingbox[] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+      \fill[color=nmbugreen] (-1,0) rectangle (1.1\paperwidth,1.1\paperheight);
+
+      \foreach \x in {0,1,2,...,\nsquares} {
+        \def\xs{\x *\squaresize +\x *\halfsquare}
+        \foreach \y in {0,1,2} {
+          \def\ys{\y *\squaresize +\y *\halfsquare +1}
+          \draw[white,line width=0.3mm] (\xs,\ys) -- (\xs +\squaresize,\ys) -- (\xs
+          +\squaresize,\ys +\squaresize) -- (\xs,\ys +\squaresize) --cycle;
+          \draw[white,line width=0.3mm] (\xs +\halfsquare,\ys
+          +\halfsquare) -- (\xs +\squaresize +\halfsquare,\ys +\halfsquare) -- (\xs
+          +\squaresize +\halfsquare,\ys +\squaresize +\halfsquare) --
+          (\xs +\halfsquare,\ys +\squaresize +\halfsquare) -- cycle;
+        }
+      }
+    % \end{tikzpicture}
+  % \end{frame}
+}
