@@ -8,6 +8,7 @@ exam_time: "09:00-12:30"
 exam_type: "C2: all types of calculators, all other written material"
 author: "Teacher (Mobile Number: 123-456)"
 external: "External"
+hide-exam-block: false
 date: "May 16, 2019"
 fontsize: '11pt'
 geometry: 'margin=1 in'

@@ -2,6 +2,7 @@
 
 export(create)
 export(exam_question)
+export(nmbu_eng)
 export(thesis)
 importFrom(bookdown,pdf_book)
 importFrom(rmarkdown,draft)

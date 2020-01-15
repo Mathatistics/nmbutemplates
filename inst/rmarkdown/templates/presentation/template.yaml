@@ -1,0 +1,4 @@
+name: "NMBU: Presentation in English"
+description: >
+ Template for creating Presentation in English using Beamer
+create_dir: true
