@@ -6,10 +6,7 @@
 \usecolortheme{NMBU}
 \usefonttheme{NMBU}
 
-% Remove default slide number
 \setbeamertemplate{footline}[default]
-\setbeamerfont{frametitle}{size=\Large}
-
 
 \setbeamertemplate{background}{
   \begin{tikzpicture}
@@ -42,24 +39,24 @@
 }
 
 
-% \metroset{progressbar=foot}
-
 % \setbeamertemplate{itemize subsubitem}{$\clubsuit$}
 % \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{navigation symbols}{} % turn off pdf nav symbols
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[sep=0.3cm,ht=1.8em,wd=\paperwidth]{frametitle}
+    \vbox{}\vskip-2ex\hskip2ex%
+    \strut\insertframetitle\strut
+    \vskip-0.8ex%
+  \end{beamercolorbox}
+}
 
 % LAST THANK YOU PAGE
-\newcommand{\thankyoumessage}[1]{\node[white,align=center,font=\huge]
+\newcommand{\thankyoumessage}[1]{\node[white,align=center,font=\Huge]
   at (0.425\paperwidth, 0.6\paperheight) {\textbf{#1}};}
 
 \usepackage{etoolbox}
-\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.2em}{}{}
-
-% Figure placement
-% \RequirePackage[absolute,overlay]{textpos}
-% \setlength{\TPHorizModule}{1cm}
-% \setlength{\TPVertModule}{1cm}
-% \def\placefig#1#2#3#4{\begin{textblock}{.1}(#1,#2)\rlap{\includegraphics[#3]{#4}}\end{textblock}}
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
 
 % Redefine shaded environment if it exists (for R plots)
 \ifcsname Shaded\endcsname

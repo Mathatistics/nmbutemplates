@@ -22,7 +22,10 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-## Slide with bullets
+## Top Aligned Slide with Columns and Bullets {.t}
+
+::: columns
+:::: column
 
 - Bullet 1
 - Bullet 2
@@ -30,11 +33,17 @@ knitr::opts_chunk$set(
 
 Use `\alert` to \alert{highlight} some text
 
+::::
+:::: column
+
 ### Some enumeration
 
 1. The first item
 1. Stuff
 1. Nonsense
+
+::::
+:::
 
 # Using R
 

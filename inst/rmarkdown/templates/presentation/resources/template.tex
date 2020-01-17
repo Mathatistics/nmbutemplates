@@ -81,7 +81,7 @@ $if(fonttheme)$
 $endif$
 
 $if(titlefontsize)$
-  \setbeamerfont{title}{series=\bfseries,parent=structure,size=\fontsize{$titlefontsize$}{28}} 
+  \setbeamerfont{title}{series=\bfseries,parent=structure,size=\fontsize{$titlefontsize$}{28}}
 $endif$
 
 $if(mainfont)$
@@ -197,8 +197,6 @@ $endif$
 \raggedbottom
 
 $if(section-titles)$
-\newcommand\YUGE{\fontsize{32}{32}\selectfont}
-\setbeamerfont{section title}[default]{size=\YUGE}
 \AtBeginPart{
   \let\insertpartnumber\relax
   \let\partname\relax
@@ -276,7 +274,6 @@ $for(header-includes)$
 $endfor$
 
 $if(title)$
-  \setbeamerfont{title}{size=\YUGE}
   \title[$shorttitle$]{$title$}
 $endif$
 
