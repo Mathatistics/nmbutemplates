@@ -26,13 +26,8 @@ NULL
 #' }
 #' @rdname exam_question
 #' @export
-#' exam_question <- function(...) {
-#'   template <- find_resource("exam_question")
-#'   rmarkdown::pdf_document(template =  template, ...)
-#' }
 
 exam_question <- function(..., show_answer = FALSE) {
-
   template <- find_resource("exam_question")
   base <- rmarkdown::pdf_document(template = template, highlight = NULL, keep_tex = TRUE, ...)
 

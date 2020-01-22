@@ -31,12 +31,20 @@ knitr::opts_chunk$set(
 - Bullet 2
 - Bullet 3
 
-Use `\alert` to \alert{highlight} some text
+There are many alert options,
+
+::: incremental
+- Use `\alert` to \alert{highlight} some text
+- Use `\alertb` to \alertb{highlight} some text
+- Use `\alertc` to \alertc{highlight} some text
+- Use `\alertd` to \alertd{highlight} some text
+- Use `\alerte` to \alerte{highlight} some text
+:::
 
 ::::
 :::: column
 
-### Some enumeration
+### Block Heading
 
 1. The first item
 1. Stuff
@@ -121,8 +129,22 @@ knitr::kable(mtcars[1:3, 1:7],
 
 ## Resources
 
+::: columns
+:::: column
 ### For more information:
 - See the [RMarkdown repository](https://github.com/rstudio/rmarkdown) for more on RMarkdown
 - See the [binb repository](https://github.com/eddelbuettel/binb) for more on binb
 - See the [binb vignettes](https://github.com/eddelbuettel/binb/vignettes) for more examples.
+::::
+:::: column
 
+\begin{exampleblock}{Example Block}
+Some body text
+\end{exampleblock}
+
+\begin{alertblock}{Alert Block}
+Some body text
+\end{alertblock}
+
+::::
+:::
