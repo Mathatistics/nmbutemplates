@@ -18,6 +18,7 @@ NULL
 #' @importFrom rmarkdown pdf_document
 #' @importFrom rmarkdown output_format knitr_options pandoc_options
 #' @param show_answer Flag to show or hide answer
+#' @param keep_tex Flag to keep or remove tex file
 #' @param
 #'   ... Arguments passed to \code{rmarkdown::\link{pdf_document}()}.
 #' @return An R Markdown output format.
@@ -27,9 +28,9 @@ NULL
 #' @rdname exam_question
 #' @export
 
-exam_question <- function(..., show_answer = FALSE) {
+exam_question <- function(..., show_answer = FALSE, keep_tex = FALSE) {
   template <- find_resource("exam_question")
-  base <- rmarkdown::pdf_document(template = template, highlight = NULL, keep_tex = TRUE, ...)
+  base <- rmarkdown::pdf_document(template = template, highlight = NULL, keep_tex = keep_tex, ...)
 
   base$pandoc$to <- "latex"
   base$pandoc$ext <- ".tex"
