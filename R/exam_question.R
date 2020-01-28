@@ -57,7 +57,7 @@ exam_question <- function(..., show_answer = FALSE) {
     x <- gsub('\\\\\\}', '}', x)
     vrb_idx <- which(grepl("```", x))
     if (!length(vrb_idx) == 0) {
-      for (i in seq(1, length(vrb_idx), 2)) {
+      for (i in seq.int(1, length(vrb_idx), 2)) {
         i1 <- vrb_idx[i]; i2 <- vrb_idx[i+1]
         x[i1] <- gsub("```", "\\\\begin{verbatim}", x[i1])
         x[i2] <- gsub("```", "\\\\end{verbatim}", x[i2])
@@ -65,9 +65,9 @@ exam_question <- function(..., show_answer = FALSE) {
     }
     xfun::write_utf8(x, f)
     tinytex::latexmk(
-               f, base$pandoc$latex_engine,
-               if ('--biblatex' %in% base$pandoc$args) 'biber' else 'bibtex'
-             )
+      f, base$pandoc$latex_engine,
+      if ('--biblatex' %in% base$pandoc$args) 'biber' else 'bibtex'
+    )
   }
 
   return(base)
