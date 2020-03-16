@@ -8,6 +8,15 @@
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbols$if(navigation)$$navigation$$else$empty$endif$
 
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+  {\par}
+$endif$
+
 $for(beameroption)$
 \setbeameroption{$beameroption$}
 $endfor$
@@ -36,7 +45,7 @@ $endif$
     \usepackage{fontspec}
 \fi
 
-\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+% \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 
 $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}

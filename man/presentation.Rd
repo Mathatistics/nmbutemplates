@@ -22,7 +22,8 @@ nmbu_eng(
   citation_package = c("none", "natbib", "biblatex"),
   includes = NULL,
   md_extensions = NULL,
-  pandoc_args = NULL
+  pandoc_args = NULL,
+  ...
 )
 }
 \arguments{
@@ -63,6 +64,8 @@ nmbu_eng(
 \item{md_extensions}{An optional character variable defaulting to \code{NULL}.}
 
 \item{pandoc_args}{An optional character variable defaulting to \code{NULL}.}
+
+\item{...}{All params that can be passed to beamer_presentation}
 }
 \value{
 RMarkdown content processed is returned for use by the

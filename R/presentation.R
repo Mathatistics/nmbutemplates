@@ -30,6 +30,7 @@
 ##' @param includes An optional character variable defaulting to \code{NULL}.
 ##' @param md_extensions An optional character variable defaulting to \code{NULL}.
 ##' @param pandoc_args An optional character variable defaulting to \code{NULL}.
+##' @param ... All params that can be passed to beamer_presentation
 ##'
 ##' @section IQSS Details: We currently set \code{slide_level} to three to use
 ##' the same appearance as the LaTeX demo. This means section and sub-section headers
@@ -69,8 +70,8 @@ nmbu_eng <- function(toc = FALSE,
                    citation_package = c("none", "natbib", "biblatex"),
                    includes = NULL,
                    md_extensions = NULL,
-                   pandoc_args = NULL) {
-  
+                   pandoc_args = NULL, ...) {
+
   fcolortheme <- paste0("beamercolortheme", colortheme, ".sty")
   for (f in c("beamerfontthemeNMBU.sty", fcolortheme,
               "beamerthemeNMBU.sty", "titlepage.png", "figs/"))
@@ -78,11 +79,11 @@ nmbu_eng <- function(toc = FALSE,
       file.copy(system.file("rmarkdown", "templates", "presentation", "skeleton",
                             f, package="nmbutemplates"),
                 ".", recursive=TRUE)
-  
+
   template <- system.file("rmarkdown", "templates", "presentation",
                           "resources", "template.tex",
                           package="nmbutemplates")
-  
+
   rmarkdown::beamer_presentation(template = template,
                                  toc = toc,
                                  slide_level = slide_level,
@@ -102,6 +103,6 @@ nmbu_eng <- function(toc = FALSE,
                                  citation_package = citation_package,
                                  includes = includes,
                                  md_extensions = md_extensions,
-                                 pandoc_args = pandoc_args)
-  
+                                 pandoc_args = pandoc_args, ...)
+
 }
