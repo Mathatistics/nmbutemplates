@@ -28,48 +28,34 @@ NULL
 #' @rdname exam_question
 #' @export
 
-exam_question <- function(..., show_answer = FALSE, keep_tex = FALSE) {
-  template <- find_resource("exam_question")
-  base <- rmarkdown::pdf_document(template = template, highlight = NULL, keep_tex = keep_tex, ...)
-
-  base$pandoc$to <- "latex"
-  base$pandoc$ext <- ".tex"
-
-  ## Take the answers and wrap around with answer environment
-  ## This function can also handle other environemnt
-  ## Would be nice to incorporate HTML output as well
-  pre <- base$pre_processor
-  base$pre_processor <- function(metadata, input_file, runtime, ...) {
-    con <- file(input_file); on.exit(close.connection(con))
-    x <- xfun::read_utf8(input_file, con)
-    x <- parse_custom_block(x, show_answer)
-    xfun::write_utf8(x, con)
+exam_question <- function(show_answer = NULL, keep_tex = TRUE, ...) {
+  pkg_resource <- function(...) {
+    system.file(..., package = "nmbutemplates")
   }
-
-  ## The manually preprocessed text need to be proparly parsed before
-  ## submitting to LaTeX.
-  post <- base$post_processor
-  base$post_processor <- function(metadata, input, output, clean, verbose) {
-    if (is.function(post)) output = post(metadata, input, output, clean, verbose)
+  exam_template <- pkg_resource("rmarkdown/templates/exam_question/resources/template.tex")
+  base_format <- pdf_document(template = exam_template, keep_tex = keep_tex, ...)
+  base_format$pandoc$to <- "latex"
+  base_format$pandoc$ext <- ".tex"
+  base_format$post_processor <- function(metadata, input, output, clean, verbose, ...) {
+    if (!is.null(show_answer)) {
+      metadata$show_answer <- show_answer
+    }
     f <- xfun::with_ext(output, '.tex')
     x <- xfun::read_utf8(f)
-    x <- gsub('\\\\textbackslash ', '\\\\', x)
-    x <- gsub('\\\\\\{', '{', x)
-    x <- gsub('\\\\\\}', '}', x)
-    vrb_idx <- which(grepl("```", x))
-    if (!length(vrb_idx) == 0) {
-      for (i in seq.int(1, length(vrb_idx), 2)) {
-        i1 <- vrb_idx[i]; i2 <- vrb_idx[i+1]
-        x[i1] <- gsub("```", "\\\\begin{verbatim}", x[i1])
-        x[i2] <- gsub("```", "\\\\end{verbatim}", x[i2])
-      }
+    fenced_line <- which(grepl(":::", x))
+    for (i in seq(1, length(fenced_line), 2)) {
+      env_i <- gsub("[ :]*", "", x[fenced_line[i]])
+      if (!metadata$show_answer) env_i <- "hidden"
+      x[fenced_line[i]] <- gsub("( *?)::: (.+?)[ ]*$", 
+                                paste0("\\1\\\\begin{", env_i,"}"), 
+                                x[fenced_line[i]])
+      x[fenced_line[i+1]] <- gsub("(.*?):::[ ]*$", 
+                                  paste0("\\1\\\\end{", env_i, "}"), 
+                                  x[fenced_line[i+1]])
     }
     xfun::write_utf8(x, f)
-    tinytex::latexmk(
-      f, base$pandoc$latex_engine,
-      if ('--biblatex' %in% base$pandoc$args) 'biber' else 'bibtex'
-    )
+    tinytex::latexmk(f)
   }
-
-  return(base)
+  
+  return(base_format)
 }

@@ -330,6 +330,15 @@ $endif$
 % Create Exam block on the top of the document. The whole block can be
 % controlled by hide-exam-block variable
 $if(hide-exam-block)$
+\begin{center}
+  $if(title)$
+    \textbf{\Huge $title$}
+  $endif$
+  $if(course_name)$
+    \vspace{12pt}\\
+    {\Large $course_name$ $if(course_code)$($course_code$)$endif$}
+  $endif$
+\end{center}
 $else$
 $if(title)$
 $if(beamer)$

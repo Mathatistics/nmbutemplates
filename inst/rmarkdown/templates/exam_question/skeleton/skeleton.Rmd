@@ -10,16 +10,14 @@ author: "Teacher (Mobile Number: 123-456)"
 external: "External"
 hide-exam-block: false
 date: "May 16, 2019"
-show_answer: true
 fontsize: '11pt'
 geometry: 'margin=1 in'
 fontfamily: 'mathpazo'
 papersize: 'A4'
 linestretch: 1.25
-logo: 'Logo.png'
 graphics: true
 ans-color: "RoyalBlue"
-output:
+output: 
   nmbutemplates::exam_question:
     show_answer: true
 extra_details: |
@@ -50,16 +48,16 @@ knitr::kable(head(mtcars, 5))
 # Exercise 1
 
 a) How many cars have four cylinders?
-
+  
     ::: answer
-    
+  
     **Bold** and _italics_ works find in the answer block together with math equations
     $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n}{x_i}$$
         
     ```{r, echo = FALSE}
     table(mtcars$cyl)
     ```
-
+    
     :::
     
 b) Which is the most powerful can interms of hoursepower?
@@ -72,7 +70,7 @@ b) Which is the most powerful can interms of hoursepower?
       - one
       - two
       - three
-
+    
     Ordered List:
     : Example ordered list
       

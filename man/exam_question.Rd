@@ -4,14 +4,14 @@
 \alias{exam_question}
 \title{Exam Question Template}
 \usage{
-exam_question(..., show_answer = FALSE, keep_tex = FALSE)
+exam_question(show_answer = NULL, keep_tex = TRUE, ...)
 }
 \arguments{
-\item{...}{Arguments passed to \code{rmarkdown::\link{pdf_document}()}.}
-
 \item{show_answer}{Flag to show or hide answer}
 
 \item{keep_tex}{Flag to keep or remove tex file}
+
+\item{...}{Arguments passed to \code{rmarkdown::\link{pdf_document}()}.}
 }
 \value{
 An R Markdown output format.
