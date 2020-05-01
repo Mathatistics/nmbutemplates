@@ -1,27 +1,32 @@
 ---
 title: "Course 123, 2019 Exam"
-subtitle: "Norwegian University of Life Sciences"
-department: "Faculty ABC"
-course_name: "Awesome Statistics Course"
-course_code: "STAT 123"
-exam_time: "09:00-12:30"
-exam_type: "C2: all types of calculators, all other written material"
-author: "Teacher (Mobile Number: 123-456)"
-external: "External"
-hide-exam-block: false
-date: "May 16, 2019"
+date: '`r Sys.Date()`'
+faculty: "Faculty ABC"
+course:
+  responsible: 'Favorite Teacher'
+  contact: '+47 12345678'
+  name: 'Awesome Statistics Course'
+  code: 'STAT360'
+exam:
+  info_block: true
+  date: 'May 16, 2019'
+  time: '09:00-12:30'
+  year: '2020'
+  code: 'C2'
+  aids: 'All types of calculator and written materials'
+  external: 'Very strict external'
+  details: |
+    You may answer in Norwegian (or “Scandinavian”) or English.
+answer:
+  show: false
+  color: 'FireBrick'
+  title: 'Solution'
 fontsize: '11pt'
-geometry: 'margin=1 in'
+geometry: 'margin=1in'
 fontfamily: 'mathpazo'
 papersize: 'A4'
-linestretch: 1.25
-graphics: true
-ans-color: "RoyalBlue"
-output: 
-  nmbutemplates::exam_question:
-    show_answer: true
-extra_details: |
-  You may answer in Norwegian (or “Scandinavian”) or English.
+linestretch: 1.20
+output: nmbutemplates::exam_question
 ---
 
 ```{r setup, include=FALSE}

@@ -161,7 +161,7 @@ $if(tables)$
 $endif$
 
 % For Graphics
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -290,6 +290,7 @@ $endif$
 \usepackage{booktabs}
 \usepackage{environ}
 \usepackage{fancyhdr}
+\usepackage{fontawesome}
 
 % Some Customization
 \setcounter{secnumdepth}{0}
@@ -305,7 +306,8 @@ $endif$
 % Create an environment'' `answer' and set it color with variable ans-color else
 % it will be blue
 \newenvironment{answer}
-  {\color{$if(ans-color)$$ans-color$$else$blue$endif$}\textsc{Answer:}}
+  {\color{$if(answer.color)$$answer.color$$else$blue$endif$}
+    $if(answer.title)$\textsc{$answer.title$}$else$\textsc{Answer:}$endif$}
   {}
 
 \usepackage{environ}
@@ -316,7 +318,7 @@ $endif$
 \setlength{\headheight}{20pt}
 \setlength{\footskip}{20pt}
 \fancyhf{}
-$if(date)$\rhead{$date$}$endif$
+$if(exam.date)$\rhead{$exam.date$}$endif$
 $if(title)$\lhead{$title$}$endif$
 \rfoot{Page \thepage}
 $if(subtitle)$\lfoot{$subtitle$}$endif$
@@ -329,57 +331,120 @@ $endif$
 
 % Create Exam block on the top of the document. The whole block can be
 % controlled by hide-exam-block variable
-$if(hide-exam-block)$
+$if(exam.info_block)$
+  \begin{minipage}{0.3\textwidth}
+    \centering
+    \includegraphics[height=18mm]{$if(logo)$$logo$$else$Logo.png$endif$}
+    \rule[0.1cm]{\textwidth}{0.5pt}
+    \textbf{Examination Question}\\
+    $if(course.code)$\small $course.code$$endif$
+    $if(exam.year)$\small, $exam.year$$endif$
+    \rule[0.1cm]{\textwidth}{0.5pt}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.65\textwidth}
+    \textbf{\large Norwegian University of Life Sciences}\\
+    $if(faculty)$
+      \textit{$faculty$}\\
+    $else$
+      \textit{Faculty of Chemistry, Biotechnology and Food Science}\\
+    $endif$
+    \hrule\vspace{0.5cm}
+    \begin{tabularx}{\linewidth}{lX}
+        $if(course.name)$
+          \textbf{Examination:} & $if(course.name)$$course.name$$else$$title$$endif$\\
+        $endif$
+        $if(course.code)$
+          \textbf{Course Code:} & \texttt{$course.code$}\\
+        $endif$
+        \textbf{Time}: & $if(exam.date)$$exam.date$$else$\today$endif$ 
+          $if(exam.time)$ ($exam.time$)$endif$\\
+        $if(course.responsible)$
+          \textbf{Responsible:} & $course.responsible$
+          $if(course.contact)$
+            (\faMobilePhone \texttt{ $course.contact$})
+          $endif$
+        $endif$\\
+        \textbf{Total Pages:} & 
+        $if(exam.sheets)$$exam.sheets$$else$\pageref{LastPage}$endif$
+        \textit{(including attachment)}
+    \end{tabularx}
+  \end{minipage}
+  $if(exam.code)$
+    \vspace{0.5cm}\\
+    \textbf{Allowed examination aids:}
+    $exam.code$
+    $if(exam.aids)$\textit{ ($exam.aids$)}$endif$\\
+  $endif$
+  \rule[0.2cm]{\textwidth}{0.5pt}
+$else$
 \begin{center}
-  $if(title)$
-    \textbf{\Huge $title$}
-  $endif$
-  $if(course_name)$
-    \vspace{12pt}\\
-    {\Large $course_name$ $if(course_code)$($course_code$)$endif$}
-  $endif$
-\end{center}
-$else$
-$if(title)$
-$if(beamer)$
-\frame{\titlepage}
-$else$
-$if(logo)${\centering\includegraphics[width=7cm]{$logo$}\\\vspace{24pt}}$endif$
-\doublespacing
-\textbf{\Huge Examination Questions}
-\vspace{10pt}\\
-\newcolumntype{Y}{>{\centering\arraybackslash}X}
-\begin{tabularx}{\textwidth}{llX}
-\toprule
-Department: & 
-  \multicolumn{2}{l}{$if(department)$\textbf{$department$}$endif$} \\
-\cmidrule(r){2-3}
-Examination in: & 
-  $if(course_code)$\textbf{$course_code$}$endif$& 
-  $if(course_name)$\textbf{$course_name$}$endif$\\
-% & $if(course_code)$\textit{(Course Code)}$endif$ &
-%   $if(course_name)$\textit{(Course Name)}$endif$\\
-\cmidrule(r){2-3}
-Time for Exam: & 
-  $if(date)$\textbf{$date$}$endif$ & 
-  $if(exam_time)$\textbf{$exam_time$}$endif$\\
-% & 
-%   $if(date)$\textit{(Day and date)}$endif$ & 
-%   $if(exam_time)$\textit{(As from - to and duration of examinations, hours)}$endif$\\
-\cmidrule(r){2-3}
-Course Responsible: & \multicolumn{2}{l}{$if(author)$\textbf{$author$}$endif$} \\
-% & \multicolumn{2}{l}{$if(author)$\textit{(Name)}$endif$} \\
-\cmidrule(r){2-3}
-Number of pages: & \multicolumn{2}{l}{$if(total_sheets)$\textbf{$total_sheets$}$else$\textbf{\pageref{LastPage}}$endif$} \\
-& \multicolumn{2}{l}{$if(total_sheets)$\textit{(Number of pages incl. attachment)}$endif$} \\
-\bottomrule
-\end{tabularx}
-\vspace{10pt}
-\newline
-\textbf{\large Permissible Aids:}\\
-$if(exam_type)$\textbf{$exam_type$}\\$endif$
-$if(extra_details)$$extra_details$$endif$
+    $if(title)$
+      \huge $title$ \\
+    $endif$
+    $if(course.name)$
+      {\Large $course.name$ $if(course.code)$($course.code$)$endif$}
+    $else$
+      $if(course_name)$
+        % ONLY FOR BACKWARD COMPATIBILITY
+        {\Large $course_name$ $if(course_code)$($course_code$)$endif$}
+      $endif$
+    $endif$
+  \end{center}
 $endif$
+
+
+% $if(hide-exam-block)$
+%   \begin{center}
+%     $if(title)$
+%       \textbf{\Huge $title$}
+%     $endif$
+%     $if(course_name)$
+%       \vspace{12pt}\\
+%       {\Large $course_name$ $if(course_code)$($course_code$)$endif$}
+%     $endif$
+%   \end{center}
+% $else$
+%   $if(title)$
+%     $if(beamer)$
+%       \frame{\titlepage}
+%     $else$
+%   $if(logo)${\centering\includegraphics[width=7cm]{$logo$}\\\vspace{24pt}}$endif$
+%   \doublespacing
+%   \textbf{\Huge Examination Questions}
+%   \vspace{10pt}\\
+%   \newcolumntype{Y}{>{\centering\arraybackslash}X}
+%   \begin{tabularx}{\textwidth}{llX}
+%   \toprule
+%   Department: & 
+%     \multicolumn{2}{l}{$if(department)$\textbf{$department$}$endif$} \\
+%   \cmidrule(r){2-3}
+%   Examination in: & 
+%     $if(course_code)$\textbf{$course_code$}$endif$& 
+%     $if(course_name)$\textbf{$course_name$}$endif$\\
+%   % & $if(course_code)$\textit{(Course Code)}$endif$ &
+%   %   $if(course_name)$\textit{(Course Name)}$endif$\\
+%   \cmidrule(r){2-3}
+%   Time for Exam: & 
+%     $if(date)$\textbf{$date$}$endif$ & 
+%     $if(exam_time)$\textbf{$exam_time$}$endif$\\
+%   % & 
+%   %   $if(date)$\textit{(Day and date)}$endif$ & 
+%   %   $if(exam_time)$\textit{(As from - to and duration of examinations, hours)}$endif$\\
+%   \cmidrule(r){2-3}
+%   Course Responsible: & \multicolumn{2}{l}{$if(author)$\textbf{$author$}$endif$} \\
+%   % & \multicolumn{2}{l}{$if(author)$\textit{(Name)}$endif$} \\
+%   \cmidrule(r){2-3}
+%   Number of pages: & \multicolumn{2}{l}{$if(total_sheets)$\textbf{$total_sheets$}$else$\textbf{\pageref{LastPage}}$endif$} \\
+%   & \multicolumn{2}{l}{$if(total_sheets)$\textit{(Number of pages incl. attachment)}$endif$} \\
+%   \bottomrule
+%   \end{tabularx}
+%   \vspace{10pt}
+%   \newline
+%   \textbf{\large Permissible Aids:}\\
+%   $if(exam_type)$\textbf{$exam_type$}\\$endif$
+%   $if(extra_details)$$extra_details$$endif$
+% $endif$
 
 % Include Abstract if needed
 % Can be removed in this particular section
@@ -422,10 +487,12 @@ $body$
 
 
 % End of the document 
-\vspace{10pt}\vfill\hrule
+\vspace{10pt}\vfill\hrule\vspace{10pt}
 \begin{description}
-$if(author)$\item[Course Responsible:] $author$$endif$
-$if(external)$\item[External Examiner:] $external$$endif$
+$if(course.responsible)$
+  \item[Course Responsible:] $course.responsible$$endif$
+$if(exam.external)$
+  \item[External Examiner:] $exam.external$$endif$
 \end{description}
 
 $if(has-frontmatter)$

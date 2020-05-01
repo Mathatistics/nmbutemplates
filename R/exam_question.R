@@ -38,14 +38,14 @@ exam_question <- function(show_answer = NULL, keep_tex = TRUE, ...) {
   base_format$pandoc$ext <- ".tex"
   base_format$post_processor <- function(metadata, input, output, clean, verbose, ...) {
     if (!is.null(show_answer)) {
-      metadata$show_answer <- show_answer
+      metadata$answer$show <- show_answer
     }
     f <- xfun::with_ext(output, '.tex')
     x <- xfun::read_utf8(f)
     fenced_line <- which(grepl(":::", x))
     for (i in seq(1, length(fenced_line), 2)) {
       env_i <- gsub("[ :]*", "", x[fenced_line[i]])
-      if (!metadata$show_answer) env_i <- "hidden"
+      if (!metadata$answer$show) env_i <- "hidden"
       x[fenced_line[i]] <- gsub("( *?)::: (.+?)[ ]*$", 
                                 paste0("\\1\\\\begin{", env_i,"}"), 
                                 x[fenced_line[i]])
