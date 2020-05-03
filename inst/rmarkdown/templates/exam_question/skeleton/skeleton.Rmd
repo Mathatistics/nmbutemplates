@@ -18,9 +18,9 @@ exam:
   details: |
     You may answer in Norwegian (or “Scandinavian”) or English.
 answer:
-  show: false
+  show: true
   color: 'FireBrick'
-  title: 'Solution'
+  title: 'Solution:'
 fontsize: '11pt'
 geometry: 'margin=1in'
 fontfamily: 'mathpazo'
@@ -55,20 +55,17 @@ knitr::kable(head(mtcars, 5))
 a) How many cars have four cylinders?
   
     ::: answer
-  
     **Bold** and _italics_ works find in the answer block together with math equations
     $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n}{x_i}$$
         
     ```{r, echo = FALSE}
     table(mtcars$cyl)
     ```
-    
     :::
     
 b) Which is the most powerful can interms of hoursepower?
     
     ::: answer
-    
     Unordered List:
     : Example unordered list
       
@@ -82,7 +79,8 @@ b) Which is the most powerful can interms of hoursepower?
       1. one
       1. two
       1. three
-      
+    
+    More general paragraphs.  
     :::
 
 # Appendix

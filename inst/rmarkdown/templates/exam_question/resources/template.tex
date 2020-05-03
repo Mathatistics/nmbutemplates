@@ -307,7 +307,7 @@ $endif$
 % it will be blue
 \newenvironment{answer}
   {\color{$if(answer.color)$$answer.color$$else$blue$endif$}
-    $if(answer.title)$\textsc{$answer.title$}$else$\textsc{Answer:}$endif$}
+    $if(answer.title)$\textsc{$answer.title$} $else$\textsc{Answer:} $endif$}
   {}
 
 \usepackage{environ}
