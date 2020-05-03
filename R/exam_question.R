@@ -44,11 +44,14 @@ exam_question <- function(show_answer = NULL, keep_tex = TRUE, ...) {
     x <- xfun::read_utf8(f)
     fenced_line <- which(grepl(":::", x))
     for (i in seq(1, length(fenced_line), 2)) {
-      env_i <- gsub("[ :]*", "", x[fenced_line[i]])
+      env_i <- gsub("[ :]*([[:alnum:]]+) *.*", "\\1", x[fenced_line[i]])
       if (!metadata$answer$show) env_i <- "hidden"
-      x[fenced_line[i]] <- gsub("( *?)::: (.+?)[ ]*$", 
-                                paste0("\\1\\\\begin{", env_i,"}"), 
+      x[fenced_line[i]] <- gsub("( *?)(::: [[:alnum:]_]+)(.*?)$", 
+                                paste0("\\1\\\\begin{", env_i, "} \\3"), 
                                 x[fenced_line[i]])
+      # x[fenced_line[i]] <- gsub("( *?)::: (.+?)[ ]*$", 
+      #                           paste0("\\1\\\\begin{", env_i,"}"), 
+      #                           x[fenced_line[i]])
       x[fenced_line[i+1]] <- gsub("(.*?):::[ ]*$", 
                                   paste0("\\1\\\\end{", env_i, "}"), 
                                   x[fenced_line[i+1]])

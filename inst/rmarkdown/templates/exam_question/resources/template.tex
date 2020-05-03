@@ -380,17 +380,18 @@ $if(exam.info_block)$
 $else$
 \begin{center}
     $if(title)$
-      \huge $title$ \\
+      \Large $title$ \\
     $endif$
     $if(course.name)$
-      {\Large $course.name$ $if(course.code)$($course.code$)$endif$}
+      {\large $course.name$ $if(course.code)$($course.code$)$endif$}
     $else$
       $if(course_name)$
         % ONLY FOR BACKWARD COMPATIBILITY
-        {\Large $course_name$ $if(course_code)$($course_code$)$endif$}
+        {\large $course_name$ $if(course_code)$($course_code$)$endif$}
       $endif$
     $endif$
   \end{center}
+  \rule[3pt]{\textwidth}{0.5pt}
 $endif$
 
 
@@ -488,12 +489,10 @@ $body$
 
 % End of the document 
 \vspace{10pt}\vfill\hrule\vspace{10pt}
-\begin{description}
 $if(course.responsible)$
-  \item[Course Responsible:] $course.responsible$$endif$
+  \textbf{Course Responsible:} $course.responsible$ \\$endif$
 $if(exam.external)$
-  \item[External Examiner:] $exam.external$$endif$
-\end{description}
+  \textbf{External Examiner:} $exam.external$ \\$endif$
 
 $if(has-frontmatter)$
 \backmatter
